@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="css/style.css">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<div class="center">
+  <div class="card">
+    <img id="loginLogo" width="70">
+    <h2 id="loginTitle"></h2>
+    <p id="loginTag"></p>
+    <button onclick="netlifyIdentity.open()">Login</button>
+  </div>
+</div>
+
+<script>
+fetch("data/settings.json").then(r=>r.json()).then(s=>{
+ loginLogo.src=s.logo;
+ loginTitle.innerText=s.siteName;
+ loginTag.innerText=s.tagline;
+});
+netlifyIdentity.on("login",()=>location.href="index.html");
+</script>

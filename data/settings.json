@@ -1,0 +1,9 @@
+{
+ "siteName":"Chakradham Online",
+ "tagline":"My online learning solution",
+ "logo":"images/logo.png",
+ "banner":{
+  "image":"images/logo.png",
+  "link":"https://google.com"
+ }
+}
