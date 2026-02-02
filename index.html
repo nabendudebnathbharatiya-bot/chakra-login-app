@@ -1,48 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
-<link rel="stylesheet" href="css/style.css">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chakradham Online</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
-
 <body>
+    <header class="topbar">
+        <img id="logo" class="logo" alt="Logo">
+        <div class="title">
+            <b id="siteName">Loading...</b>
+            <small id="tagline"></small>
+        </div>
+        <button class="loginBtn" onclick="netlifyIdentity.open()">Login</button>
+    </header>
 
-<header class="topbar">
-  <img id="logo" class="logo">
-  <div class="title">
-    <b id="siteName"></b>
-    <small id="tagline"></small>
-  </div>
+    <div class="slider">
+        <a id="adLink" href="#">
+            <img id="adImage" alt="Banner" src="">
+        </a>
+    </div>
 
-  <button class="loginBtn" onclick="netlifyIdentity.open()">Login</button>
-</header>
+    <input id="search" placeholder="Search apps, tags, or categories...">
+    <div id="chips" class="chips"></div>
 
-<!-- Slider -->
-<div class="slider">
-  <a id="adLink"><img id="adImage"></a>
-</div>
+    <main id="content"></main>
+    <div id="pagination" class="pagination"></div>
 
-<input id="search" placeholder="Search apps or tags...">
+    <nav class="bottom-nav">
+        <button onclick="showHome()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Home</span>
+        </button>
+        <button onclick="showFavorites()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span>Fav</span>
+        </button>
+        <button onclick="toggleDark()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <span>Dark</span>
+        </button>
+    </nav>
 
-<!-- category chips -->
-<div id="chips" class="chips"></div>
-
-<main id="content"></main>
-
-<div id="pagination" class="pagination"></div>
-
-<!-- bottom nav -->
-<nav class="bottom-nav">
-  <button onclick="showHome()">🏠<span>Home</span></button>
-  <button onclick="showFavorites()">❤️<span>Fav</span></button>
-  <button onclick="toggleDark()">🌙<span>Dark</span></button>
-</nav>
-
-<script src="js/settings.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/app.js"></script>
-
+    <script src="js/auth.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
