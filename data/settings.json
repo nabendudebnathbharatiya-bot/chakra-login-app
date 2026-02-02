@@ -1,11 +1,22 @@
+
 {
- "siteName":"Chakradham Online",
- "tagline":"My Online Learning Solution",
- "logo":"images/logo.jpg",
- "banner":{
-  "image":"images/logo.jpg",
-  "link":"https://google.com"
- ),
- ( "image": "images/11049562_126825087651709_3101575069736934968_n~3.jpg",
-    "link": "https://google.com")
+  "siteName": "Chakradham Online",
+  "tagline": "My Online Learning Solution",
+
+  "logo": "images/logo.jpg",
+
+  "banners": [
+    {
+      "image": "images/logo.jpg",
+      "link": "https://google.com"
+    },
+    {
+      "image": "images/logo.jpg",
+      "link": "https://google.com"
+    },
+    {
+      "image": "images/logo.jpg",
+      "link": "https://google.com"
+    }
+  ]
 }
