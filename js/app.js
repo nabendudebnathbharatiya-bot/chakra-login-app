@@ -1,11 +1,11 @@
 // State variables
 let allApps = []; // Store complete list
 let currentApps = []; // Store currently filtered list
-let favorites = JSON.parse(localStorage.getItem("fav") || "[]"); // [cite: 16]
+let favorites = JSON.parse(localStorage.getItem("fav") || "[]");
 let page = 1;
 const perPage = 20;
 
-// Fetch Data immediately [cite: 20]
+// Fetch Data immediately
 fetch("data/data.json")
     .then(r => r.json())
     .then(data => {
@@ -31,9 +31,11 @@ function render() {
 
     paginatedList.forEach(app => {
         const isPremium = app.premium;
-        const userLoggedIn = isLoggedIn(); // Check auth from auth.js
+        // Check auth from auth.js
+        // Note: auth.js must be loaded before app.js in index.html
+        const userLoggedIn = (typeof isLoggedIn === 'function') ? isLoggedIn() : false;
         const isLocked = isPremium && !userLoggedIn;
-        const isFav = favorites.includes(app.id); // Check if favorite [cite: 15]
+        const isFav = favorites.includes(app.id); 
 
         content.innerHTML += `
             <div class="card">
@@ -42,10 +44,12 @@ function render() {
                 </button>
                 <img class="icon" src="${app.image || 'images/logo.png'}" loading="lazy">
                 <h4>${app.name}</h4>
+                
                 <button class="btn open" 
-                    onclick="${isLocked ? "netlifyIdentity.open()" : `window.open('${app.url}', '_blank')`}">
+                    onclick="${isLocked ? "netlifyIdentity.open()" : `window.location.href='${app.url}'`}">
                     ${isLocked ? "Login to Open" : "Open App"}
                 </button>
+
                 <button class="btn info" onclick="openInfo('${app.details || '#'}')">
                     App Info
                 </button>
@@ -56,7 +60,7 @@ function render() {
     buildPagination();
 }
 
-// Favorite Logic (LocalStorage) [cite: 16]
+// Favorite Logic (LocalStorage)
 function toggleFav(id) {
     if (favorites.includes(id)) {
         favorites = favorites.filter(favId => favId !== id);
@@ -66,13 +70,11 @@ function toggleFav(id) {
     localStorage.setItem("fav", JSON.stringify(favorites));
     
     // If we are currently viewing favorites, re-render to remove the item immediately
-    const navFavBtn = document.querySelector('.bottom-nav button:nth-child(2)');
-    // A simple check if we are in "favorites mode" could be improved, but re-rendering works
     render(); 
 }
 
 function showFavorites() {
-    // Filter allApps by IDs present in favorites array [cite: 18]
+    // Filter allApps by IDs present in favorites array
     currentApps = allApps.filter(app => favorites.includes(app.id));
     page = 1;
     render();
@@ -84,7 +86,7 @@ function showHome() {
     render();
 }
 
-// Search Logic (Name, Category, Tags) [cite: 19]
+// Search Logic (Name, Category, Tags)
 document.getElementById("search").addEventListener("input", (e) => {
     const q = e.target.value.toLowerCase();
     
@@ -102,6 +104,8 @@ document.getElementById("search").addEventListener("input", (e) => {
 // Category Chips
 function createChips() {
     const chipsContainer = document.getElementById("chips");
+    if(!chipsContainer) return;
+    
     const categories = ["All", ...new Set(allApps.map(a => a.category))];
     
     chipsContainer.innerHTML = categories.map(cat => 
@@ -123,6 +127,8 @@ function filterCategory(cat) {
 function buildPagination() {
     const totalPages = Math.ceil(currentApps.length / perPage);
     const container = document.getElementById("pagination");
+    if(!container) return;
+    
     container.innerHTML = "";
 
     if(totalPages <= 1) return;
@@ -138,7 +144,7 @@ function goToPage(p) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Dark Mode Toggle [cite: 22]
+// Dark Mode Toggle
 // Check system preference or saved preference on load
 if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark");
@@ -150,6 +156,9 @@ function toggleDark() {
     localStorage.setItem("theme", isDark ? "dark" : "light");
 }
 
+// App Info Open (Same Tab)
 function openInfo(link) {
-    if(link && link !== '#') window.location.href = link;
-                                }
+    if(link && link !== '#') {
+        window.location.href = link;
+    }
+            }
