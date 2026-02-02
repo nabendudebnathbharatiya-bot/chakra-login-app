@@ -5,5 +5,7 @@
  "banner":{
   "image":"images/logo.jpg",
   "link":"https://google.com"
- }
+ },
+ ( "image": "images/ad2.jpg",
+    "link": "https://site2.com")
 }
