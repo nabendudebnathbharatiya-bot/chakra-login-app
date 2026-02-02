@@ -8,5 +8,17 @@
   "category":"Education",
   "tags":["gov","exam"],
   "premium":true
- }
+ },
+ {
+ "id":2,
+ "name":"New App",
+ "url":"https://example.com",
+ "details":"https://info.com",
+ "image":"images/logo.png",
+ "category":"Education",
+ "tags":["study"],
+ "premium":false
+}
+
 ]
+
