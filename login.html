@@ -1,20 +1,52 @@
-<link rel="stylesheet" href="css/style.css">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
 
-<div class="center">
-  <div class="card">
-    <img id="loginLogo" width="70">
-    <h2 id="loginTitle"></h2>
-    <p id="loginTag"></p>
-    <button onclick="netlifyIdentity.open()">Login</button>
-  </div>
-</div>
+    <div class="center" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div class="card" style="text-align: center; padding: 40px; width: 300px;">
+            <img id="loginLogo" class="logo" width="80" alt="Logo">
+            
+            <h2 id="loginTitle" style="margin: 10px 0;"></h2>
+            <p id="loginTag" style="color: #64748b; font-size: 14px; margin-bottom: 20px;"></p>
+            
+            <button class="btn open" onclick="netlifyIdentity.open()">Login / Signup</button>
+            <br>
+            <button class="btn info" onclick="location.href='index.html'" style="background:none; color:#64748b; margin-top:10px;">
+                Back to Home
+            </button>
+        </div>
+    </div>
 
-<script>
-fetch("data/settings.json").then(r=>r.json()).then(s=>{
- loginLogo.src=s.logo;
- loginTitle.innerText=s.siteName;
- loginTag.innerText=s.tagline;
-});
-netlifyIdentity.on("login",()=>location.href="index.html");
-</script>
+    <script>
+        // ১. ডার্ক মোড চেক: ইউজার আগে ডার্ক মোড অন করে থাকলে এই পেজেও তা দেখাবে
+        if (localStorage.getItem("theme") === "dark") {
+            document.body.classList.add("dark");
+        }
+
+        // ২. সেটিংস থেকে লোগো এবং নাম নিয়ে আসা
+        fetch("data/settings.json")
+            .then(r => r.json())
+            .then(s => {
+                document.getElementById("loginLogo").src = s.logo;
+                document.getElementById("loginTitle").innerText = s.siteName;
+                document.getElementById("loginTag").innerText = s.tagline;
+            })
+            .catch(err => console.error("Error loading settings:", err));
+
+        // ৩. লগইন সফল হলে হোম পেজে পাঠানো
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("login", () => {
+                location.href = "index.html";
+            });
+        }
+    </script>
+
+</body>
+</html>
