@@ -3,38 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login Access</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
 </head>
 <body>
 
     <div class="center" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <div class="card" style="text-align: center; padding: 40px; width: 300px;">
             <img id="loginLogo" class="logo" width="80" alt="Logo">
-            
-            <h2 id="loginTitle" style="margin: 10px 0;"></h2>
+            <h2 id="loginTitle" style="margin: 10px 0;">Wait...</h2>
             <p id="loginTag" style="color: #64748b; font-size: 14px; margin-bottom: 20px;"></p>
             
-            <button class="btn open" onclick="netlifyIdentity.open()">Login / Signup</button>
-            <br>
-            <button class="btn info" onclick="location.href='index.html'" style="background:none; color:#64748b; margin-top:10px;">
-                Back to Home
-            </button>
+            <input type="email" id="email" placeholder="Enter Email" style="width:90%; padding:12px; margin-bottom:10px; border-radius:8px; border:1px solid #ccc;">
+            <input type="password" id="pass" placeholder="Enter Password" style="width:90%; padding:12px; margin-bottom:5px; border-radius:8px; border:1px solid #ccc;">
+
+            <p onclick="handleReset()" style="cursor:pointer; color:#2563eb; font-size:13px; text-align:right; margin-right:10px; margin-top:5px;">
+                Forgot Password?
+            </p>
+
+            <button class="btn open" onclick="handleLogin()" style="margin-top:15px;">Login</button>
+            
+            <p style="font-size:12px; color:#64748b; margin-top:20px;">
+                Contact Admin for Access (Invite Only)
+            </p>
         </div>
     </div>
 
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+
     <script>
-        // ১. ডার্ক মোড চেক: ইউজার আগে ডার্ক মোড অন করে থাকলে এই পেজেও তা দেখাবে
-        if (localStorage.getItem("theme") === "dark") {
-            document.body.classList.add("dark");
+        // Settings Load
+        fetch("data/settings.json").then(r => r.json()).then(s => {
+            document.getElementById("loginLogo").src = s.logo;
+            document.getElementById("loginTitle").innerText = s.siteName;
+            document.getElementById("loginTag").innerText = s.tagline;
+        });
+
+        // Login Logic
+        function handleLogin() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+            if(email && pass) {
+                auth.signInWithEmailAndPassword(email, pass)
+                    .catch(e => alert("Login Failed: " + e.message));
+            } else {
+                alert("Please enter email and password");
+            }
         }
 
-        // ২. সেটিংস থেকে লোগো এবং নাম নিয়ে আসা
-        fetch("data/settings.json")
-            .then(r => r.json())
-            .then(s => {
-                document.getElementById("loginLogo").src = s.logo;
+        // Reset Logic
+        function handleReset() {
+            const email = document.getElementById('email').value;
+            if(!email) return alert("Please write your email in the box first!");
+            
+            auth.sendPasswordResetEmail(email)
+                .then(() => alert("Reset link sent to " + email))
+                .catch(e => alert("Error: " + e.message));
+        }
+        
+        // Dark Mode
+        if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
+    </script>
+</body>
+    </html>                document.getElementById("loginLogo").src = s.logo;
                 document.getElementById("loginTitle").innerText = s.siteName;
                 document.getElementById("loginTag").innerText = s.tagline;
             })
