@@ -11,8 +11,8 @@
 </head>
 <body>
 
-    <div class="center" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-        <div class="card" style="text-align: center; padding: 40px; width: 300px;">
+    <div class="center" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+        <div class="card" style="text-align: center; padding: 30px; width: 300px; margin: 20px;">
             <img id="loginLogo" class="logo" width="80" alt="Logo">
             <h2 id="loginTitle" style="margin: 10px 0;">Wait...</h2>
             <p id="loginTag" style="color: #64748b; font-size: 14px; margin-bottom: 20px;"></p>
@@ -24,11 +24,27 @@
                 Forgot Password?
             </p>
 
-            <button class="btn open" onclick="handleLogin()" style="margin-top:15px;">Login</button>
+            <button class="btn open" onclick="handleLogin()" style="margin-top:15px; width: 100%;">Login</button>
             
-            <p style="font-size:12px; color:#64748b; margin-top:20px;">
-                Contact Admin for Access (Invite Only)
-            </p>
+            <div style="margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 15px; text-align: center;">
+                
+                <p style="font-size:13px; color:#334155; font-weight: bold; margin-bottom: 8px;">
+                    ⚠️ Invite Only Access
+                </p>
+                
+                <p style="font-size:12px; color:#64748b; margin-bottom: 5px; line-height: 1.4;">
+                    এই অ্যাপটি শুধুমাত্র আমন্ত্রিত মেম্বারদের জন্য। পাসওয়ার্ড পেতে অ্যাডমিনের সাথে যোগাযোগ করুন।
+                </p>
+                
+                <p style="font-size:12px; color:#64748b; margin-bottom: 8px; line-height: 1.4;">
+                    यह ऐप केवल आमंत्रित लोगों के लिए है। पासवर्ड के लिए एडमिन से संपर्क करें।
+                </p>
+
+                <a href="mailto:nabendudebnathbharatiya@gmail.com" style="font-size:12px; color:#2563eb; font-weight:bold; text-decoration:none; word-break: break-all;">
+                    📧 nabendudebnathbharatiya@gmail.com
+                </a>
+                
+            </div>
         </div>
     </div>
 
@@ -69,19 +85,4 @@
         if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
     </script>
 </body>
-    </html>                document.getElementById("loginLogo").src = s.logo;
-                document.getElementById("loginTitle").innerText = s.siteName;
-                document.getElementById("loginTag").innerText = s.tagline;
-            })
-            .catch(err => console.error("Error loading settings:", err));
-
-        // ৩. লগইন সফল হলে হোম পেজে পাঠানো
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("login", () => {
-                location.href = "index.html";
-            });
-        }
-    </script>
-
-</body>
-</html>
+    </html>
