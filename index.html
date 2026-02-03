@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chakradham Online</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+
 </head>
 <body>
     <header class="topbar">
@@ -14,16 +17,14 @@
             <b id="siteName">Loading...</b>
             <small id="tagline"></small>
         </div>
-        <button class="loginBtn" onclick="netlifyIdentity.open()">Login</button>
+        <button class="loginBtn" onclick="logoutUser()">Logout</button>
     </header>
 
     <div class="slider">
-        <a id="adLink" href="#">
-            <img id="adImage" alt="Banner" src="">
-        </a>
+        <a id="adLink" href="#"><img id="adImage" alt="Banner" src=""></a>
     </div>
 
-    <input id="search" placeholder="Search apps, tags, or categories...">
+    <input id="search" placeholder="Search apps...">
     <div id="chips" class="chips"></div>
 
     <main id="content"></main>
@@ -31,28 +32,22 @@
 
     <nav class="bottom-nav">
         <button onclick="showHome()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
             <span>Home</span>
         </button>
         <button onclick="showFavorites()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-            </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
             <span>Fav</span>
         </button>
         <button onclick="toggleDark()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             <span>Dark</span>
         </button>
     </nav>
 
+    <script src="js/firebase-config.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/app.js"></script>
 </body>
-</html>
+    </html>
