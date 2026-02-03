@@ -1,18 +1,18 @@
 // State variables
-let allApps = []; // Store complete list
-let currentApps = []; // Store currently filtered list
+let allApps = [];
+let currentApps = [];
 let favorites = JSON.parse(localStorage.getItem("fav") || "[]");
 let page = 1;
 const perPage = 20;
 
-// Fetch Data immediately
+// Fetch Data
 fetch("data/data.json")
     .then(r => r.json())
     .then(data => {
         allApps = data;
-        currentApps = [...allApps]; // Initialize with all apps
+        currentApps = [...allApps];
         createChips();
-        render(); // Render immediately
+        render();
     })
     .catch(err => console.error("Error loading data:", err));
 
@@ -31,8 +31,7 @@ function render() {
 
     paginatedList.forEach(app => {
         const isPremium = app.premium;
-        // Check auth from auth.js
-        // Note: auth.js must be loaded before app.js in index.html
+        // Auth check (Safe check)
         const userLoggedIn = (typeof isLoggedIn === 'function') ? isLoggedIn() : false;
         const isLocked = isPremium && !userLoggedIn;
         const isFav = favorites.includes(app.id); 
@@ -46,7 +45,7 @@ function render() {
                 <h4>${app.name}</h4>
                 
                 <button class="btn open" 
-                    onclick="${isLocked ? "netlifyIdentity.open()" : `window.location.href='${app.url}'`}">
+                    onclick="${isLocked ? "window.location.href='login.html'" : `window.location.href='${app.url}'`}">
                     ${isLocked ? "Login to Open" : "Open App"}
                 </button>
 
@@ -60,7 +59,7 @@ function render() {
     buildPagination();
 }
 
-// Favorite Logic (LocalStorage)
+// Favorite Logic
 function toggleFav(id) {
     if (favorites.includes(id)) {
         favorites = favorites.filter(favId => favId !== id);
@@ -68,13 +67,10 @@ function toggleFav(id) {
         favorites.push(id);
     }
     localStorage.setItem("fav", JSON.stringify(favorites));
-    
-    // If we are currently viewing favorites, re-render to remove the item immediately
     render(); 
 }
 
 function showFavorites() {
-    // Filter allApps by IDs present in favorites array
     currentApps = allApps.filter(app => favorites.includes(app.id));
     page = 1;
     render();
@@ -86,39 +82,30 @@ function showHome() {
     render();
 }
 
-// Search Logic (Name, Category, Tags)
+// Search Logic
 document.getElementById("search").addEventListener("input", (e) => {
     const q = e.target.value.toLowerCase();
-    
     currentApps = allApps.filter(app => {
-        const nameMatch = app.name.toLowerCase().includes(q);
-        const catMatch = app.category.toLowerCase().includes(q);
-        const tagMatch = (app.tags || []).some(t => t.toLowerCase().includes(q));
-        return nameMatch || catMatch || tagMatch;
+        return app.name.toLowerCase().includes(q) || 
+               app.category.toLowerCase().includes(q) || 
+               (app.tags || []).some(t => t.toLowerCase().includes(q));
     });
-
     page = 1;
     render();
 });
 
-// Category Chips
+// Chips
 function createChips() {
     const chipsContainer = document.getElementById("chips");
     if(!chipsContainer) return;
-    
     const categories = ["All", ...new Set(allApps.map(a => a.category))];
-    
     chipsContainer.innerHTML = categories.map(cat => 
         `<button class="chip" onclick="filterCategory('${cat}')">${cat}</button>`
     ).join("");
 }
 
 function filterCategory(cat) {
-    if (cat === "All") {
-        currentApps = [...allApps];
-    } else {
-        currentApps = allApps.filter(a => a.category === cat);
-    }
+    currentApps = (cat === "All") ? [...allApps] : allApps.filter(a => a.category === cat);
     page = 1;
     render();
 }
@@ -128,11 +115,8 @@ function buildPagination() {
     const totalPages = Math.ceil(currentApps.length / perPage);
     const container = document.getElementById("pagination");
     if(!container) return;
-    
     container.innerHTML = "";
-
     if(totalPages <= 1) return;
-
     for (let i = 1; i <= totalPages; i++) {
         container.innerHTML += `<button class="${i === page ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
     }
@@ -144,21 +128,14 @@ function goToPage(p) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Dark Mode Toggle
-// Check system preference or saved preference on load
-if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark");
-}
-
+// Dark Mode
+if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
 function toggleDark() {
     document.body.classList.toggle("dark");
-    const isDark = document.body.classList.contains("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+    localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
 }
 
-// App Info Open (Same Tab)
+// Info Open (Same Tab)
 function openInfo(link) {
-    if(link && link !== '#') {
-        window.location.href = link;
-    }
-            }
+    if(link && link !== '#') window.location.href = link;
+                      }
