@@ -121,7 +121,7 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.card h4 { margin: 8px 0; font-size: 16px; }
+.card h4 { margin: 8px 0; font-size: 20px; }
 
 /* Buttons */
 .btn {
