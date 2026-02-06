@@ -50,10 +50,10 @@ body {
 }
 
 /* --- Slider --- */
-.slider { padding: 0 12px; }
+.slider { padding: 0 10px; }
 .slider img {
     width: 100%;
-    height: 140px;
+    height: 120px;
     object-fit: cover;
     border-radius: 18px;
     margin: 10px 0;
@@ -77,14 +77,14 @@ body {
     display: flex;
     overflow-x: auto;
     gap: 8px;
-    padding: 0 12px 10px;
+    padding: 0 14px 10px;
     scrollbar-width: none;
 }
 .chip {
     background: #e5e7eb;
     padding: 8px 16px;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 18px;
     border: none;
     white-space: nowrap;
     cursor: pointer;
@@ -113,8 +113,8 @@ body {
 
 /* Circular App Icons  */
 .icon {
-    width: 64px;
-    height: 64px;
+    width: 70px;
+    height: 70px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 8px;
