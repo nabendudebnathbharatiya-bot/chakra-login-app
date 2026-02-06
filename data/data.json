@@ -1,13 +1,13 @@
 [
  {
   "id":1,
-  "name":"Gov Results",
+  "name":"বেদ কথা",
   "url":"https://example.com",
   "details":"https://yourblog.com/gov-results-info",
   "image":"images/logo.png",
-  "category":"Education",
-  "tags":["gov","exam"],
-  "premium":true
+  "category":"জ্ঞানপথ",
+  "tags":["শিক্ষা,বেদ,জ্ঞান,ved, education learning"],
+  "premium":false
  },
  {
  "id":2,
