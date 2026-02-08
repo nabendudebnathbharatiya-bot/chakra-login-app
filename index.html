@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        // চেক করা হচ্ছে ইউজার লগইন করেছে কি না
-        if (!sessionStorage.getItem("chakra_user_login")) {
-            // যদি টোকেন না থাকে, সোজা লগইন পেজে পাঠিয়ে দেবে
-            window.location.href = "login.html"; 
-        }
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chakradham Online</title>
@@ -15,6 +8,7 @@
     
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+
 </head>
 <body>
     <header class="topbar">
@@ -23,7 +17,7 @@
             <b id="siteName">Loading...</b>
             <small id="tagline"></small>
         </div>
-        <button class="loginBtn" onclick="handleLogout()">Logout</button>
+<button class="loginBtn" onclick="window.location.href='login.html'">Login</button>
     </header>
 
     <div class="slider">
@@ -55,15 +49,6 @@
     <script src="js/auth.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/app.js"></script>
-
-    <script>
-        // Logout Function Added
-        function handleLogout() {
-            sessionStorage.removeItem("chakra_user_login"); // টোকেন ডিলিট
-            auth.signOut().then(() => {
-                window.location.href = "login.html"; // লগইন পেজে ফেরত
-            });
-        }
-    </script>
 </body>
-    </html>
+                                                                                                                                                                                                                                                                             </html>
+                
