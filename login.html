@@ -27,9 +27,23 @@
             <button class="btn open" onclick="handleLogin()" style="margin-top:15px; width: 100%;">Login</button>
             
             <div style="margin-top: 25px; border-top: 1px solid #e2e8f0; padding-top: 15px; text-align: center;">
-                <p style="font-size:13px; color:#334155; font-weight: bold; margin-bottom: 8px;">⚠️ Invite Only Access</p>
-                <p style="font-size:12px; color:#64748b; margin-bottom: 5px; line-height: 1.4;">এই অ্যাপটি শুধুমাত্র আমন্ত্রিত মেম্বারদের জন্য।</p>
-                <a href="mailto:nabendudebnathbharatiya@gmail.com" style="font-size:12px; color:#2563eb; font-weight:bold; text-decoration:none;">📧 Email Admin</a>
+                
+                <p style="font-size:13px; color:#334155; font-weight: bold; margin-bottom: 8px;">
+                    ⚠️ Invite Only Access
+                </p>
+                
+                <p style="font-size:12px; color:#64748b; margin-bottom: 5px; line-height: 1.4;">
+                    এই অ্যাপটি শুধুমাত্র আমন্ত্রিত মেম্বারদের জন্য। পাসওয়ার্ড পেতে অ্যাডমিনের সাথে যোগাযোগ করুন।
+                </p>
+                
+                <p style="font-size:12px; color:#64748b; margin-bottom: 8px; line-height: 1.4;">
+                    यह ऐप केवल आमंत्रित लोगों के लिए है। पासवर्ड के लिए एडमिन से संपर्क करें।
+                </p>
+
+                <a href="mailto:nabendudebnathbharatiya@gmail.com" style="font-size:12px; color:#2563eb; font-weight:bold; text-decoration:none; word-break: break-all;">
+                    📧 nabendudebnathbharatiya@gmail.com
+                </a>
+                
             </div>
         </div>
     </div>
@@ -40,40 +54,34 @@
     <script>
         // Settings Load
         fetch("data/settings.json").then(r => r.json()).then(s => {
-            if(document.getElementById("loginLogo")) document.getElementById("loginLogo").src = s.logo;
-            if(document.getElementById("loginTitle")) document.getElementById("loginTitle").innerText = s.siteName;
-            if(document.getElementById("loginTag")) document.getElementById("loginTag").innerText = s.tagline;
-        }).catch(e => console.log("Settings not found, using default."));
+            document.getElementById("loginLogo").src = s.logo;
+            document.getElementById("loginTitle").innerText = s.siteName;
+            document.getElementById("loginTag").innerText = s.tagline;
+        });
 
-        // --- UPDATED LOGIN LOGIC ---
+        // Login Logic
         function handleLogin() {
             const email = document.getElementById('email').value;
             const pass = document.getElementById('pass').value;
-            
             if(email && pass) {
                 auth.signInWithEmailAndPassword(email, pass)
-                    .then((userCredential) => {
-                        // 1. সফল লগইন হলে টোকেন সেভ হবে
-                        sessionStorage.setItem("chakra_user_login", "true");
-                        
-                        // 2. এরপর মেইন অ্যাপে রিডাইরেক্ট হবে
-                        // (আপনার মেইন ফাইলটির নাম যদি index.html হয়, তবে সেটিই থাকবে)
-                        window.location.href = "index.html"; 
-                    })
                     .catch(e => alert("Login Failed: " + e.message));
             } else {
                 alert("Please enter email and password");
             }
         }
 
+        // Reset Logic
         function handleReset() {
             const email = document.getElementById('email').value;
             if(!email) return alert("Please write your email in the box first!");
+            
             auth.sendPasswordResetEmail(email)
                 .then(() => alert("Reset link sent to " + email))
                 .catch(e => alert("Error: " + e.message));
         }
         
+        // Dark Mode
         if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark");
     </script>
 </body>
