@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শিক্ষাসাথী - টুলস ও ক্যালকুলেটর</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        hind: ['"Hind Siliguri"', 'sans-serif'],
+                    },
+                    colors: {
+                        gold: '#FFD700',
+                        dark: '#1a1a1a',
+                        card: '#2d2d2d'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* স্ক্রলবার লুকানো */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* এনিমেশন */
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: #111827; 
+            color: #f3f4f6;
+        }
+        /* বড় ফন্ট সাইজ */
+        p, li { font-size: 1.15rem; line-height: 1.8rem; }
+    </style>
+</head>
+<body class="no-scrollbar">
+
+    <header class="fixed top-0 w-full z-50 bg-gray-900 border-b border-gray-700 shadow-lg">
+        <div class="flex justify-between items-center px-4 py-3 max-w-2xl mx-auto">
+            <button onclick="window.history.back()" class="flex items-center text-blue-400 hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="font-bold text-lg">ফিরে যান</span>
+            </button>
+            
+            <h1 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                শিক্ষাসাথী
+            </h1>
+
+            <button class="text-gray-400 hover:text-blue-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="bg-gradient-to-r from-blue-800 to-cyan-700 text-white text-sm py-1 overflow-hidden">
+            <div class="marquee font-semibold text-lg">
+                🔢 জটিল অঙ্ক হোক বা জমির পরিমাপ—সব সমাধান এখন এক অ্যাপে! শিক্ষাসাথী প্রিমিয়াম আনলক করুন। 🔢
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-28 pb-10 px-4 max-w-2xl mx-auto space-y-8">
+
+        <section class="text-center space-y-4">
+            <div class="relative w-full h-48 rounded-xl overflow-hidden shadow-2xl border border-gray-700 group">
+                <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                     alt="Math Tools" 
+                     class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <h2 class="text-4xl font-bold text-white drop-shadow-lg">🧮 শিক্ষাসাথী</h2>
+                </div>
+            </div>
+            <p class="text-cyan-400 text-xl font-semibold italic">
+                "আপনার পকেটে ডিজিটাল ল্যাবরেটরি"
+            </p>
+        </section>
+
+        <section class="bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-700">
+            <h3 class="text-2xl font-bold text-white mb-4 border-b border-gray-600 pb-2">
+                ছাত্রছাত্রী ও প্রফেশনালদের সেরা বন্ধু
+            </h3>
+            
+            <ul class="space-y-4 text-gray-300">
+                <li class="flex items-start">
+                    <span class="mr-3 text-3xl">🔢</span>
+                    <div>
+                        <strong class="text-blue-400 text-xl">সায়েন্টিফিক ক্যালকুলেটর:</strong>
+                        <p>সাধারণ যোগ-বিয়োগ থেকে শুরু করে জটিল অ্যালজেবরা ও ত্রিকোণমিতি—সব সমাধান এক নিমেষে।</p>
+                    </div>
+                </li>
+                
+                <li class="flex items-start">
+                    <span class="mr-3 text-3xl">📏</span>
+                    <div>
+                        <strong class="text-blue-400 text-xl">স্মার্ট কনভার্টার:</strong>
+                        <p>জমির পরিমাপ (বিঘা/কাঠা), ওজন, তাপমাত্রা বা কারেন্সি কনভার্ট করুন নির্ভুলভাবে।</p>
+                    </div>
+                </li>
+
+                <li class="flex items-start">
+                    <span class="mr-3 text-3xl">📝</span>
+                    <div>
+                        <strong class="text-blue-400 text-xl">ডিজিটাল নোটবুক:</strong>
+                        <p>ক্লাসের লেকচার, সূত্র বা জরুরি তথ্য লিখে সেভ করে রাখুন। কাগজ-কলম ছাড়াই নোট নিন।</p>
+                    </div>
+                </li>
+
+                <li class="flex items-start">
+                    <span class="mr-3 text-3xl">📡</span>
+                    <div>
+                        <strong class="text-blue-400 text-xl">অফলাইন সাপোর্ট:</strong>
+                        <p>ইন্টারনেট ছাড়াই ক্যালকুলেটর এবং কনভার্টার টুলগুলো ব্যবহার করার সুবিধা।</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-2xl border border-blue-500/30">
+            <h3 class="text-2xl font-bold text-center text-blue-400 mb-6">
+                🔓 ফুল ভার্সন আনলক করার নিয়ম
+            </h3>
+            
+            <div class="space-y-6">
+                <div class="flex items-center bg-gray-700 p-4 rounded-lg">
+                    <div class="bg-blue-500 text-white font-bold w-10 h-10 flex items-center justify-center rounded-full text-xl shrink-0">১</div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-bold text-white">মেইল করুন</h4>
+                        <p class="text-gray-300">আমাদের অফিশিয়াল মেইলে রিকোয়েস্ট পাঠান।</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center bg-gray-700 p-4 rounded-lg">
+                    <div class="bg-blue-500 text-white font-bold w-10 h-10 flex items-center justify-center rounded-full text-xl shrink-0">২</div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-bold text-white">পেমেন্ট কনফার্ম</h4>
+                        <p class="text-gray-300">স্বল্প মূল্যের সাবস্ক্রিপশন ফি জমা দিন।</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center bg-gray-700 p-4 rounded-lg">
+                    <div class="bg-blue-500 text-white font-bold w-10 h-10 flex items-center justify-center rounded-full text-xl shrink-0">৩</div>
+                    <div class="ml-4">
+                        <h4 class="text-xl font-bold text-white">সিক্রেট কী (Key)</h4>
+                        <p class="text-gray-300">পাসওয়ার্ড দিয়ে টুলবক্স ওপেন করুন।</p>
+                    </div>
+                </div>
+
+                <div class="text-center pt-2">
+                    <a href="mailto:nabendudebnathbharatiya@gmail.com?subject=Premium%20Request%20for%20Shikshasathi" 
+                       class="inline-block w-full py-3 bg-blue-600 hover:bg-blue-700 text-white text-xl font-bold rounded-lg transition shadow-lg flex items-center justify-center gap-2">
+                       <span>📧</span> অ্যাডমিনকে মেইল করুন
+                    </a>
+                    <p class="text-sm text-gray-400 mt-2">Email: nabendudebnathbharatiya@gmail.com</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 p-8 rounded-2xl shadow-inner border-t-4 border-blue-500">
+            <h3 class="text-3xl font-bold text-center text-white mb-6">টুলবক্স লগইন</h3>
+            <form action="#" class="space-y-5">
+                <div>
+                    <label class="block text-gray-400 mb-2 text-lg">আপনার ইমেইল</label>
+                    <input type="email" placeholder="example@gmail.com" 
+                           class="w-full p-4 rounded-lg bg-gray-900 border border-gray-600 text-white text-lg focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <div>
+                    <label class="block text-gray-400 mb-2 text-lg">সিক্রেট পাসওয়ার্ড</label>
+                    <input type="password" placeholder="••••••••" 
+                           class="w-full p-4 rounded-lg bg-gray-900 border border-gray-600 text-white text-lg focus:outline-none focus:border-blue-500 transition">
+                </div>
+                <button type="button" class="w-full py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-xl font-bold rounded-lg hover:opacity-90 transition transform active:scale-95 shadow-lg">
+                    🚀 টুলস চালু করুন
+                </button>
+            </form>
+        </section>
+
+        <footer class="text-center space-y-4 pt-4 border-t border-gray-800">
+            <p class="text-gray-400 text-lg">
+                🛠️ এই টুলগুলো নির্ভুল গণনার জন্য তৈরি। প্রিমিয়াম মেম্বাররা বিজ্ঞাপন ছাড়াই সব ফিচার ব্যবহার করতে পারবেন।
+            </p>
+            <div class="text-gray-600 text-sm">
+                &copy; 2026 Chakradham Online. All rights reserved.
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+</html>
