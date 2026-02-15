@@ -1,24 +1,24 @@
 [
- {
-  "id":1,
-  "name":"বেদ কথা",
-  "url":"https://example.com",
-  "details":"https://yourblog.com/gov-results-info",
-  "image":"images/logo.png",
-  "category":"জ্ঞানপথ",
-  "tags":["শিক্ষা,বেদ,জ্ঞান,ved, education learning"],
-  "premium":false
- },
- {
- "id":2,
- "name":"ভারতীয় বীর যোদ্ধা",
- "url":"https://example.com",
- "details":"https://info.com",
- "image":"images/logo.png",
- "category":"comedy",
- "tags":["study"],
- "premium":false
-}
-
+  {
+    "id": 1,
+    "name": "জ্ঞানপথ Education ",
+    "url": "https://nabendudebnathbharatiya-bot.github.io/Gyanpath-main-directory/",
+    "details": "edu.html",
+    "image": "images/logo.png",
+    "category": "জ্ঞানপথ",
+    "tags": "শিক্ষা,বেদ,জ্ঞান,ved,education,learning",
+    "premium": false
+  },
+  {
+    "id": 2,
+    "name": "ভারতীয় বীর যোদ্ধা",
+    "url": "https://example.com",
+    "details": "https://info.com",
+    "image": "images/logo.png",
+    "category": "comedy",
+    "tags": [
+      "study"
+    ],
+    "premium": false
+  }
 ]
-
