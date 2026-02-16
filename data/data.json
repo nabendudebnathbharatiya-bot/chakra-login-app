@@ -11,14 +11,12 @@
   },
   {
     "id": 2,
-    "name": "ভারতীয় বীর যোদ্ধা",
-    "url": "https://example.com",
-    "details": "https://info.com",
+    "name": "শিক্ষাসাথী Smart Edutool",
+    "url": "tool.html",
+    "details": "tool.html",
     "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/Ved/Vedbibhajon/education-child-care-logo-book-symbol-represents-foundation-learning-growth-symbolizing-nurturing-environment-380842340.jpg",
     "category": "comedy",
-    "tags": [
-      "study"
-    ],
+    "tags":"tool,help,converter,system,ai",
     "premium": false
   }
 ]
