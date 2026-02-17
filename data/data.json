@@ -43,10 +43,10 @@
     "id": 5,
     "name": "অনুসন্ধান Research",
     "url": "research.html",
-    "details": "redearch.html",
+    "details": "research.html",
     "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/Ved/Vedbibhajon/stock-vector-construction-search-vector-logo-design-template-2702223783.jpg",
     "category": "অনুসন্ধান ও নির্মাণ",
     "tags":"inovation,আবিষ্কার,উদ্যোগ,উদ্ভাবন,নির্মাণ,science,idea",
-    "premium": true
+    "premium": false
     }
 ]
