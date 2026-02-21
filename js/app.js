@@ -5,16 +5,27 @@ let favorites = JSON.parse(localStorage.getItem("fav") || "[]");
 let page = 1;
 const perPage = 20;
 
-// Fetch Data
-fetch("data/data.json")
-    .then(r => r.json())
+// Fetch Data (Cache Busting যুক্ত করা হয়েছে)
+const cacheBuster = new Date().getTime();
+fetch("data/data.json?v=" + cacheBuster)
+    .then(r => {
+        if (!r.ok) throw new Error("Data file missing or syntax error");
+        return r.json();
+    })
     .then(data => {
         allApps = data;
         currentApps = [...allApps];
         createChips();
         render();
     })
-    .catch(err => console.error("Error loading data:", err));
+    .catch(err => {
+        console.error("Error loading data:", err);
+        // ভুল হলে স্ক্রিনে মেসেজ দেখাবে
+        const content = document.getElementById("content");
+        if(content) {
+            content.innerHTML = `<p style="grid-column: span 2; text-align:center; color:red; font-weight:bold; padding: 20px;">ডেটা লোড হতে সমস্যা হচ্ছে! JSON ফাইলে কোনো কমা (,) বা ভুল আছে কি না চেক করুন।</p>`;
+        }
+    });
 
 // Render Function
 function render() {
@@ -36,9 +47,10 @@ function render() {
         const isLocked = isPremium && !userLoggedIn;
         const isFav = favorites.includes(app.id); 
 
+        // Note: toggleFav('${app.id}') - তে সিঙ্গেল কোটেশন দেওয়া হয়েছে, যাতে ID টেক্সট হলেও এরর না আসে।
         content.innerHTML += `
             <div class="card">
-                <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav(${app.id})">
+                <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFav('${app.id}')">
                    ${isFav ? '♥' : '♡'}
                 </button>
                 <img class="icon" src="${app.image || 'images/logo.png'}" loading="lazy">
@@ -87,7 +99,7 @@ document.getElementById("search").addEventListener("input", (e) => {
     const q = e.target.value.toLowerCase();
     currentApps = allApps.filter(app => {
         return app.name.toLowerCase().includes(q) || 
-               app.category.toLowerCase().includes(q) || 
+               (app.category && app.category.toLowerCase().includes(q)) || 
                (app.tags || []).some(t => t.toLowerCase().includes(q));
     });
     page = 1;
@@ -98,7 +110,7 @@ document.getElementById("search").addEventListener("input", (e) => {
 function createChips() {
     const chipsContainer = document.getElementById("chips");
     if(!chipsContainer) return;
-    const categories = ["All", ...new Set(allApps.map(a => a.category))];
+    const categories = ["All", ...new Set(allApps.map(a => a.category).filter(Boolean))];
     chipsContainer.innerHTML = categories.map(cat => 
         `<button class="chip" onclick="filterCategory('${cat}')">${cat}</button>`
     ).join("");
@@ -138,4 +150,4 @@ function toggleDark() {
 // Info Open (Same Tab)
 function openInfo(link) {
     if(link && link !== '#') window.location.href = link;
-                      }
+}
