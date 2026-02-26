@@ -249,8 +249,13 @@
       const finalVideoUrl = getCacheBustedUrl(data.videoUrl);
       container.innerHTML = `
         <h3 class="text-xl font-bold text-center mb-6 text-gray-900 dark:text-white">${data.title}</h3>
-        <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 bg-black animate-fade-in">
-          <iframe class="w-full h-64 md:h-96" src="${finalVideoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 bg-black animate-fade-in flex justify-center">
+          
+          <video class="w-full h-auto md:h-96 object-contain outline-none" controls preload="metadata">
+            <source src="${finalVideoUrl}" type="video/mp4">
+            আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
+          </video>
+          
         </div>
         <p class="text-center mt-4 text-gray-600 dark:text-gray-400">${data.description}</p>`;
     }
