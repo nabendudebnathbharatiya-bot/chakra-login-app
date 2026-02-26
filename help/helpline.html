@@ -301,6 +301,13 @@
       }
     }
 
+   // --- Enter বাটন চাপলে কাজ করার ফাংশন (এটি মিসিং ছিল) ---
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendToGroq();
+        }
+    }
+
    // --- Real AI Logic (Connecting to Vercel Serverless Function) ---
     async function sendToGroq() {
       const input = document.getElementById('ai-input');
@@ -340,7 +347,7 @@
       chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
 
       try {
-        // Vercel API-তে রিকোয়েস্ট পাঠানো
+        // Vercel API-তে রিকোয়েস্ট পাঠানো
         const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -366,14 +373,15 @@
             </div>
           </div>`;
         chatBox.insertAdjacentHTML('beforeend', aiMsgHtml);
-        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' }); // টাইপো ফিক্স করা হয়েছে
 
       } catch (error) {
         // এরর হলে মেসেজ দেখানো
         document.getElementById(loadingId).remove();
-        chatBox.insertAdjacentHTML('beforeend', `<div class="text-red-500 text-sm mt-4 text-center">দুঃখিত, এআই এর সাথে সংযোগ করতে সমস্যা হচ্ছে।</div>`);
+        chatBox.insertAdjacentHTML('beforeend', `<div class="text-red-500 text-sm mt-4 text-center">দুঃখিত, এআই এর সাথে সংযোগ করতে সমস্যা হচ্ছে। (${error.message})</div>`);
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
       }
-    }
+  }
   </script>
 </body>
 </html>
