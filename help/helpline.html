@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chakradham Online - Professional Help Desk</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.3s ease-in-out',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .scrollbar-default::-webkit-scrollbar { width: 6px; }
+    .scrollbar-default::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+    .scrollbar-default::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
+    .dark .scrollbar-default::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+    .dark .scrollbar-default::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 p-4 md:p-8 transition-colors duration-300 antialiased font-sans">
+
+  <div class="max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700">
+    
+    <div class="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50">
+      <h2 class="text-3xl font-extrabold text-center text-gray-900 dark:text-white tracking-tight">
+        <span class="text-blue-600 dark:text-blue-500">Chakradham</span> সহায়তা কেন্দ্র
+      </h2>
+      <p class="text-center text-gray-500 dark:text-gray-400 mt-2 text-sm">আপনার শেখার যাত্রাকে সহজ করতে আমরা পাশে আছি</p>
+    </div>
+
+    <div class="p-4 bg-white dark:bg-gray-800">
+      <div class="flex flex-wrap justify-center gap-2 p-1 bg-gray-100 dark:bg-gray-700/50 rounded-xl">
+        
+        <button class="tab-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ease-in-out bg-blue-600 text-white shadow-md dark:bg-blue-500" onclick="openTab(event, 'ai-help')">
+          <i class="ph ph-robot text-lg text-white"></i> Groq AI
+        </button>
+        
+        <button class="tab-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ease-in-out text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700" onclick="openTab(event, 'video-help'); loadSectionData('video')">
+          <i class="ph ph-video-camera text-lg"></i> ভিডিও গাইড
+        </button>
+        
+        <button class="tab-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ease-in-out text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700" onclick="openTab(event, 'text-help'); loadSectionData('faq')">
+          <i class="ph ph-article text-lg"></i> প্রশ্নোত্তর (FAQ)
+        </button>
+        
+        <button class="tab-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ease-in-out text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700" onclick="openTab(event, 'audio-help'); loadSectionData('audio')">
+          <i class="ph ph-speaker-high text-lg"></i> অডিও বার্তা
+        </button>
+        
+        <button class="tab-btn flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ease-in-out text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700" onclick="openTab(event, 'image-help'); loadSectionData('image')">
+          <i class="ph ph-image text-lg"></i> স্ক্রিনশট
+        </button>
+
+      </div>
+    </div>
+
+    <div class="p-6 md:p-8 min-h-[400px]">
+
+      <div id="ai-help" class="tab-content block animate-fade-in">
+        <div class="flex flex-col h-[450px] border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm">
+          <div class="bg-blue-50 dark:bg-gray-700/30 p-4 flex items-center gap-3 border-b border-gray-200 dark:border-gray-700">
+            <div class="w-10 h-10 bg-gradient-to-tr from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-sm">
+              <i class="ph ph-robot text-white text-2xl"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white">স্মার্ট অ্যাসিস্ট্যান্ট</h4>
+              <p class="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
+                <span class="w-2 h-2 bg-green-500 rounded-full inline-block animate-pulse"></span> অনলাইন
+              </p>
+            </div>
+          </div>
+          
+          <div id="chat-box" class="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-[#0B1120] scrollbar-default space-y-4">
+            <div class="flex gap-3">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
+                 <i class="ph ph-robot text-blue-600 dark:text-blue-400"></i>
+              </div>
+              <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none px-5 py-3 shadow-sm max-w-[80%]">
+                <p class="text-sm leading-relaxed">
+                  <span class="font-bold block mb-1 text-blue-600 dark:text-blue-400">AI অ্যাসিস্ট্যান্ট:</span>
+                  নমস্কার! আমি Chakradham Online-এর এআই বন্ধু। আপনার পড়াশোনা বা প্ল্যাটফর্ম নিয়ে কোনো প্রশ্ন থাকলে আমাকে নির্দ্বিধায় বলুন।
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 relative">
+            <div class="relative flex items-center">
+              <input type="text" id="ai-input" placeholder="আপনার প্রশ্ন এখানে লিখুন..." class="w-full pl-5 pr-16 py-4 bg-gray-100 dark:bg-gray-900 border-0 rounded-full focus:ring-2 focus:ring-blue-500/50 transition-shadow dark:text-white shadow-inner" onkeypress="handleKeyPress(event)">
+              <button onclick="sendToGroq()" class="absolute right-2 top-1/2 -translate-y-1/2 p-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-md transition-transform hover:scale-105 flex items-center justify-center">
+                <i class="ph ph-paper-plane-tilt text-xl font-bold"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="video-help" class="tab-content hidden animate-fade-in">
+        <div id="video-container" class="max-w-3xl mx-auto"></div>
+      </div>
+
+      <div id="text-help" class="tab-content hidden animate-fade-in">
+        <div id="faq-container" class="max-w-3xl mx-auto space-y-4"></div>
+      </div>
+
+      <div id="audio-help" class="tab-content hidden animate-fade-in">
+        <div id="audio-container" class="max-w-2xl mx-auto text-center"></div>
+      </div>
+
+      <div id="image-help" class="tab-content hidden animate-fade-in">
+        <div id="image-container" class="max-w-4xl mx-auto"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // --- Tab Switching Logic (Fully Fixed & Professional UI Kept) ---
+    function openTab(event, tabId) {
+      // 1. Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('block');
+      });
+
+      // 2. Reset all button styles to "Inactive"
+      const activeClasses = ['bg-blue-600', 'text-white', 'shadow-md', 'dark:bg-blue-500'];
+      const inactiveClasses = ['text-gray-600', 'hover:bg-gray-200', 'dark:text-gray-300', 'dark:hover:bg-gray-700'];
+      
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove(...activeClasses);
+        btn.classList.add(...inactiveClasses);
+        const icon = btn.querySelector('i');
+        if(icon) icon.classList.remove('text-white');
+      });
+
+      // 3. Show clicked tab content
+      document.getElementById(tabId).classList.remove('hidden');
+      document.getElementById(tabId).classList.add('block');
+
+      // 4. Set "Active" styles to clicked button
+      const clickedBtn = event.currentTarget;
+      clickedBtn.classList.remove(...inactiveClasses);
+      clickedBtn.classList.add(...activeClasses);
+      const activeIcon = clickedBtn.querySelector('i');
+      if(activeIcon) activeIcon.classList.add('text-white');
+    }
+
+    // --- Cache Busting Utility ---
+    function getCacheBustedUrl(url) {
+      if (!url) return '';
+      const separator = url.includes('?') ? '&' : '?';
+      return `${url}${separator}v=${new Date().getTime()}`;
+    }
+
+    // --- Master Data Fetching Logic ---
+    async function fetchDynamicData(jsonUrl, containerId, renderCallback) {
+      const container = document.getElementById(containerId);
+      
+      if(container.dataset.loaded === "true") return;
+
+      // 1. Show Loading State
+      container.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-12 animate-fade-in">
+          <i class="ph ph-spinner animate-spin text-4xl text-blue-500 mb-3"></i>
+          <p class="text-gray-500 dark:text-gray-400">ডেটা লোড হচ্ছে...</p>
+        </div>`;
+
+      try {
+        // 2. Fetch with Cache Busting
+        const fetchUrl = getCacheBustedUrl(jsonUrl);
+        const response = await fetch(fetchUrl);
+
+        // 3. Error Handling for Network/404
+        if (!response.ok) {
+          throw new Error(`ফাইল পাওয়া যায়নি (Status: ${response.status})`);
+        }
+
+        const data = await response.json();
+
+        // 4. Fallback for Empty Data
+        if (!data || (Array.isArray(data) && data.length === 0) || Object.keys(data).length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-12 animate-fade-in">
+              <i class="ph ph-empty text-4xl text-gray-400 mb-3"></i>
+              <p class="text-gray-500 dark:text-gray-400">এই মুহূর্তে কোনো তথ্য নেই।</p>
+            </div>`;
+          return;
+        }
+
+        // 5. Render Data
+        container.innerHTML = ''; 
+        renderCallback(data, container);
+        container.dataset.loaded = "true";
+
+      } catch (error) {
+        // Show proper error UI
+        container.innerHTML = `
+          <div class="text-center py-8 text-red-500 bg-red-50 dark:bg-red-900/20 rounded-xl border border-red-200 dark:border-red-800 animate-fade-in">
+            <i class="ph ph-warning-circle text-4xl mb-2"></i>
+            <p class="font-bold text-lg">দুঃখিত, তথ্য লোড করতে সমস্যা হয়েছে!</p>
+            <p class="text-sm mt-1 opacity-80 mb-3">দয়া করে চেক করুন <strong>${jsonUrl}</strong> ফাইলটি সার্ভারে আছে কি না।</p>
+            <p class="text-xs font-mono bg-white dark:bg-gray-800 p-2 rounded inline-block text-gray-600 shadow-sm border border-red-100 dark:border-red-900">${error.message}</p>
+          </div>`;
+      }
+    }
+
+    // --- Render Callbacks ---
+
+    function renderFAQ(data, container) {
+      let html = '<h3 class="text-xl font-bold text-center mb-6 text-gray-900 dark:text-white">সচরাচর জিজ্ঞাসিত প্রশ্ন (FAQ)</h3>';
+      data.forEach(item => {
+        html += `
+          <details class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all mb-3 animate-fade-in">
+            <summary class="flex justify-between items-center p-5 cursor-pointer list-none font-semibold text-gray-900 dark:text-white">
+              <span class="flex items-center gap-3"><i class="ph ph-question text-blue-500 text-xl"></i> ${item.question}</span>
+              <i class="ph ph-caret-down text-gray-400 group-open:rotate-180 transition-transform"></i>
+            </summary>
+            <div class="px-5 pb-5 pt-2 text-gray-600 dark:text-gray-300 border-t border-gray-100 dark:border-gray-700/50 ml-9 leading-relaxed">
+              ${item.answer}
+            </div>
+          </details>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function renderVideo(data, container) {
+      const finalVideoUrl = getCacheBustedUrl(data.videoUrl);
+      container.innerHTML = `
+        <h3 class="text-xl font-bold text-center mb-6 text-gray-900 dark:text-white">${data.title}</h3>
+        <div class="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 bg-black animate-fade-in">
+          <iframe class="w-full h-64 md:h-96" src="${finalVideoUrl}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p class="text-center mt-4 text-gray-600 dark:text-gray-400">${data.description}</p>`;
+    }
+
+    function renderAudio(data, container) {
+      const finalAudioUrl = getCacheBustedUrl(data.audioUrl);
+      container.innerHTML = `
+        <h3 class="text-xl font-bold mb-6 flex items-center justify-center gap-2 text-gray-900 dark:text-white">
+          <i class="ph ph-waveform text-blue-500"></i> ${data.title}
+        </h3>
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700 relative overflow-hidden animate-fade-in">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500"></div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">${data.description}</p>
+          <audio controls class="w-full outline-none" src="${finalAudioUrl}">
+            আপনার ব্রাউজার অডিও সাপোর্ট করে না।
+          </audio>
+        </div>`;
+    }
+
+    function renderImage(data, container) {
+      const finalImageUrl = getCacheBustedUrl(data.imageUrl);
+      container.innerHTML = `
+        <h3 class="text-xl font-bold text-center mb-6 text-gray-900 dark:text-white">${data.title}</h3>
+        <figure class="relative group rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 animate-fade-in">
+          <img src="${finalImageUrl}" alt="${data.altText}" class="w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]">
+          <figcaption class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <p class="text-sm text-gray-300">${data.description}</p>
+          </figcaption>
+        </figure>`;
+    }
+
+    // --- Trigger function for loading data ---
+    function loadSectionData(type) {
+      // এখানে ফাইলের লোকেশন দেওয়া আছে। সার্ভারে ঠিক এই নামেই ফোল্ডার ও ফাইল থাকতে হবে।
+      if (type === 'faq') {
+        fetchDynamicData('data/faq.json', 'faq-container', renderFAQ);
+      } else if (type === 'video') {
+        fetchDynamicData('data/video.json', 'video-container', renderVideo);
+      } else if (type === 'audio') {
+        fetchDynamicData('data/audio.json', 'audio-container', renderAudio);
+      } else if (type === 'image') {
+        fetchDynamicData('data/image.json', 'image-container', renderImage);
+      }
+    }
+
+    // --- Dummy AI Logic (Will be replaced with real Groq API) ---
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') sendToGroq();
+    }
+
+    function sendToGroq() {
+      const input = document.getElementById('ai-input');
+      const chatBox = document.getElementById('chat-box');
+      const messageText = input.value.trim();
+      
+      if(messageText !== "") {
+        const userMsgHtml = `
+          <div class="flex gap-3 justify-end animate-fade-in">
+            <div class="bg-blue-600 dark:bg-blue-500 text-white border border-blue-600 dark:border-blue-500 rounded-2xl rounded-br-none px-5 py-3 shadow-md max-w-[80%]">
+              <p class="text-sm leading-relaxed">${messageText}</p>
+            </div>
+            <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
+               <i class="ph ph-user text-gray-600 dark:text-gray-300"></i>
+            </div>
+          </div>`;
+        chatBox.insertAdjacentHTML('beforeend', userMsgHtml);
+        input.value = "";
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+
+        const loadingId = 'loading-' + Date.now();
+        const loadingHtml = `
+           <div id="${loadingId}" class="flex gap-3 animate-fade-in mt-4">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
+                 <i class="ph ph-robot text-blue-600 dark:text-blue-400"></i>
+              </div>
+              <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none px-5 py-4 shadow-sm flex items-center gap-1">
+                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+              </div>
+            </div>`;
+        chatBox.insertAdjacentHTML('beforeend', loadingHtml);
+        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+
+        setTimeout(() => {
+          document.getElementById(loadingId).remove();
+          const aiMsgHtml = `
+            <div class="flex gap-3 animate-fade-in mt-4">
+              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
+                 <i class="ph ph-robot text-blue-600 dark:text-blue-400"></i>
+              </div>
+              <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none px-5 py-3 shadow-sm max-w-[80%]">
+                <p class="text-sm leading-relaxed">
+                  <span class="font-bold block mb-1 text-blue-600 dark:text-blue-400">AI অ্যাসিস্ট্যান্ট:</span>
+                  আপনার প্রশ্নের উত্তর দিতে আমি প্রস্তুত, শুধু আমার ব্যাকএন্ডে Groq API যুক্ত করে দিন! 🚀
+                </p>
+              </div>
+            </div>`;
+          chatBox.insertAdjacentHTML('beforeend', aiMsgHtml);
+          chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+        }, 1500);
+      }
+    }
+  </script>
+</body>
+</html>
