@@ -286,13 +286,13 @@
     function loadSectionData(type) {
       // এখানে ফাইলের লোকেশন দেওয়া আছে। সার্ভারে ঠিক এই নামেই ফোল্ডার ও ফাইল থাকতে হবে।
       if (type === 'faq') {
-        fetchDynamicData('data/faq.json', 'faq-container', renderFAQ);
+        fetchDynamicData('faq.json', 'faq-container', renderFAQ);
       } else if (type === 'video') {
-        fetchDynamicData('data/video.json', 'video-container', renderVideo);
+        fetchDynamicData('video.json', 'video-container', renderVideo);
       } else if (type === 'audio') {
-        fetchDynamicData('data/audio.json', 'audio-container', renderAudio);
+        fetchDynamicData('audio.json', 'audio-container', renderAudio);
       } else if (type === 'image') {
-        fetchDynamicData('data/image.json', 'image-container', renderImage);
+        fetchDynamicData('image.json', 'image-container', renderImage);
       }
     }
 
