@@ -1,1 +1,6 @@
-
+{
+  "title": "ড্যাশবোর্ড পরিচিতি",
+  "description": "কোথায় কী অপশন আছে তা একনজরে দেখে নিন।",
+  "imageUrl": "dashboard-screenshot.png",
+  "altText": "Chakradham Dashboard Image"
+}
