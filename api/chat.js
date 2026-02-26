@@ -1,14 +1,16 @@
 export default async function handler(req, res) {
-  // শুধুমাত্র POST রিকোয়েস্ট গ্রহণ করবে
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { message } = req.body;
-  const apiKey = process.env.GROQ_API_KEY; // Vercel থেকে API Key নিচ্ছে
+  const apiKey = process.env.GROQ_API_KEY;
+
+  if (!apiKey) {
+    return res.status(500).json({ error: 'API key is missing' });
+  }
 
   try {
-    // Groq API-তে ডেটা পাঠানো
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -16,24 +18,28 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'llama3-8b-8192', // আপনি চাইলে 'mixtral-8x7b-32768' ও ব্যবহার করতে পারেন
+        model: 'llama3-8b-8192', 
         messages: [
           { 
             role: 'system', 
-            content: 'You are a friendly and helpful AI assistant for an online learning platform called Chakradham Online. Reply concisely and politely in Bengali.' 
+            content: 'You are a helpful assistant for Chakradham Online.' 
           },
           { role: 'user', content: message }
         ]
       })
     });
 
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Groq API Error Response:", errorText);
+        throw new Error(`Groq API Error: ${response.status}`);
+    }
+
     const data = await response.json();
-    
-    // Groq-এর উত্তর ফ্রন্ট-এন্ডে পাঠানো
     res.status(200).json({ reply: data.choices[0].message.content });
 
   } catch (error) {
-    console.error('Groq API Error:', error);
-    res.status(500).json({ error: 'Failed to fetch response from AI' });
+    console.error('Server Error:', error);
+    res.status(500).json({ error: error.message || 'Failed to fetch response' });
   }
-}
+            }
