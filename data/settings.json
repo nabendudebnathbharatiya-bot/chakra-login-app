@@ -7,16 +7,20 @@
 
   "banners": [
     {
-      "image": "images/logoc.jpg",
-      "link": "https://nabendudebnathbharatiya-bot.github.io/chakradham-cosmic-healing-app-/"
+      "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/images/book-style-banner%20(1).png",
+      "link": "https://www.chakradhamonline.com"
     },
     {
-      "image": "images/logob.png",
-      "link": "https://nabendudebnathbharatiya-bot.github.io/chakradham-cosmic-healing-app-/"
+      "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/images/book-style-banner%20(2).png",
+      "link": "https://www.chakradhamonline.com"
     },
     {
-      "image": "images/logoa.png",
-      "link": "https://nabendudebnathbharatiya-bot.github.io/chakradham-cosmic-healing-app-/"
+      "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/images/book-style-banner%20(3).png",
+      "link": "https://www.chakradhamonline.com"
+    },
+    {
+      "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/images/book-style-banner%20(4).png",
+      "link": "https://www.chakradhamonline.com"
     }
   ]
 }
