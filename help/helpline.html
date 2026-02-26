@@ -301,62 +301,77 @@
       }
     }
 
-    // --- Dummy AI Logic (Will be replaced with real Groq API) ---
-    function handleKeyPress(event) {
-        if (event.key === 'Enter') sendToGroq();
-    }
-
-    function sendToGroq() {
+   // --- Real AI Logic (Connecting to Vercel Serverless Function) ---
+    async function sendToGroq() {
       const input = document.getElementById('ai-input');
       const chatBox = document.getElementById('chat-box');
       const messageText = input.value.trim();
       
-      if(messageText !== "") {
-        const userMsgHtml = `
-          <div class="flex gap-3 justify-end animate-fade-in">
-            <div class="bg-blue-600 dark:bg-blue-500 text-white border border-blue-600 dark:border-blue-500 rounded-2xl rounded-br-none px-5 py-3 shadow-md max-w-[80%]">
-              <p class="text-sm leading-relaxed">${messageText}</p>
+      if(messageText === "") return;
+
+      // ইউজারের মেসেজ স্ক্রিনে দেখানো
+      const userMsgHtml = `
+        <div class="flex gap-3 justify-end animate-fade-in">
+          <div class="bg-blue-600 dark:bg-blue-500 text-white border border-blue-600 dark:border-blue-500 rounded-2xl rounded-br-none px-5 py-3 shadow-md max-w-[80%]">
+            <p class="text-sm leading-relaxed">${messageText}</p>
+          </div>
+          <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
+             <i class="ph ph-user text-gray-600 dark:text-gray-300"></i>
+          </div>
+        </div>`;
+      chatBox.insertAdjacentHTML('beforeend', userMsgHtml);
+      input.value = "";
+      chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+
+      // লোডিং অ্যানিমেশন দেখানো
+      const loadingId = 'loading-' + Date.now();
+      const loadingHtml = `
+         <div id="${loadingId}" class="flex gap-3 animate-fade-in mt-4">
+            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
+               <i class="ph ph-robot text-blue-600 dark:text-blue-400"></i>
             </div>
-            <div class="w-8 h-8 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
-               <i class="ph ph-user text-gray-600 dark:text-gray-300"></i>
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none px-5 py-4 shadow-sm flex items-center gap-1">
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
             </div>
           </div>`;
-        chatBox.insertAdjacentHTML('beforeend', userMsgHtml);
-        input.value = "";
+      chatBox.insertAdjacentHTML('beforeend', loadingHtml);
+      chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
+
+      try {
+        // Vercel API-তে রিকোয়েস্ট পাঠানো
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: messageText })
+        });
+
+        const data = await response.json();
+        document.getElementById(loadingId).remove(); // লোডিং মুছে ফেলা
+
+        if (!response.ok) throw new Error(data.error || 'API Error');
+
+        // AI এর আসল উত্তর স্ক্রিনে দেখানো
+        const aiMsgHtml = `
+          <div class="flex gap-3 animate-fade-in mt-4">
+            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
+               <i class="ph ph-robot text-blue-600 dark:text-blue-400"></i>
+            </div>
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none px-5 py-3 shadow-sm max-w-[80%]">
+              <p class="text-sm leading-relaxed whitespace-pre-wrap">
+                <span class="font-bold block mb-1 text-blue-600 dark:text-blue-400">AI অ্যাসিস্ট্যান্ট:</span>
+                ${data.reply}
+              </p>
+            </div>
+          </div>`;
+        chatBox.insertAdjacentHTML('beforeend', aiMsgHtml);
         chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
 
-        const loadingId = 'loading-' + Date.now();
-        const loadingHtml = `
-           <div id="${loadingId}" class="flex gap-3 animate-fade-in mt-4">
-              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
-                 <i class="ph ph-robot text-blue-600 dark:text-blue-400"></i>
-              </div>
-              <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none px-5 py-4 shadow-sm flex items-center gap-1">
-                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
-              </div>
-            </div>`;
-        chatBox.insertAdjacentHTML('beforeend', loadingHtml);
-        chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
-
-        setTimeout(() => {
-          document.getElementById(loadingId).remove();
-          const aiMsgHtml = `
-            <div class="flex gap-3 animate-fade-in mt-4">
-              <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-full flex-shrink-0 flex items-center justify-center self-end mb-1">
-                 <i class="ph ph-robot text-blue-600 dark:text-blue-400"></i>
-              </div>
-              <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl rounded-bl-none px-5 py-3 shadow-sm max-w-[80%]">
-                <p class="text-sm leading-relaxed">
-                  <span class="font-bold block mb-1 text-blue-600 dark:text-blue-400">AI অ্যাসিস্ট্যান্ট:</span>
-                  আপনার প্রশ্নের উত্তর দিতে আমি প্রস্তুত, শুধু আমার ব্যাকএন্ডে Groq API যুক্ত করে দিন! 🚀
-                </p>
-              </div>
-            </div>`;
-          chatBox.insertAdjacentHTML('beforeend', aiMsgHtml);
-          chatBox.scrollTo({ top: chatBox.scrollHeight, behavior: 'smooth' });
-        }, 1500);
+      } catch (error) {
+        // এরর হলে মেসেজ দেখানো
+        document.getElementById(loadingId).remove();
+        chatBox.insertAdjacentHTML('beforeend', `<div class="text-red-500 text-sm mt-4 text-center">দুঃখিত, এআই এর সাথে সংযোগ করতে সমস্যা হচ্ছে।</div>`);
       }
     }
   </script>
