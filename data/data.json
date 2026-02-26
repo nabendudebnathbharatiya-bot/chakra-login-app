@@ -16,7 +16,7 @@
     "details": "tool.html",
     "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/Ved/Vedbibhajon/education-child-care-logo-book-symbol-represents-foundation-learning-growth-symbolizing-nurturing-environment-380842340.jpg",
     "category": "শিক্ষাসাথী",
-    "tags":"tool,help,converter,system,ai",
+    "tags": "tool,help,converter,system,ai",
     "premium": false
   },
   {
@@ -25,28 +25,38 @@
     "url": "test.html",
     "details": "test.html",
     "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/Ved/Vedbibhajon/IE-single_final.jpg",
-    "category": "Test & perform",
-    "tags":"test,quiz,flashcard,game,play",
+    "category": "প্রতিযোগিতা",
+    "tags": "test,quiz,flashcard,game,play",
     "premium": false
   },
-    {
+  {
     "id": 4,
     "name": "বিনোদন Enjoyment",
     "url": "enter.html",
     "details": "enter.html",
     "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/Ved/Vedbibhajon/flower-petal-swastika-symbol-that-260nw-2001325487.jpg",
     "category": "বিনোদন ও সংস্কৃতি",
-    "tags":"movie,audio,song,dance,show,poem",
+    "tags": "movie,audio,song,dance,show,poem",
     "premium": false
-    },
-    {
+  },
+  {
     "id": 5,
     "name": "অনুসন্ধান Research",
     "url": "research.html",
     "details": "research.html",
     "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/Ved/Vedbibhajon/stock-vector-construction-search-vector-logo-design-template-2702223783.jpg",
     "category": "অনুসন্ধান ও নির্মাণ",
-    "tags":"inovation,আবিষ্কার,উদ্যোগ,উদ্ভাবন,নির্মাণ,science,idea",
+    "tags": "inovation,আবিষ্কার,উদ্যোগ,উদ্ভাবন,নির্মাণ,science,idea",
     "premium": false
-    }
-]
+  },
+  {
+    "id": "6",
+    "name": "সহায়তা কেন্দ্র Help Center ",
+    "url": "help/helpline.html",
+    "details": "help/helpline.html",
+    "image": "https://raw.githubusercontent.com/nabendudebnathbharatiya-bot/My-app-assets2/main/images/Chakra-ad/images.jpeg",
+    "category": "HELP সহায়তা ",
+    "tags": "Help, সহায়তা, হেল্প ",
+    "premium": "false"
+  }
+    ]
